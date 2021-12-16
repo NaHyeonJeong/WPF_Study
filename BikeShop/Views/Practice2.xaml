@@ -1,0 +1,53 @@
+﻿<Page x:Class="BikeShop.Views.Practice2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BikeShop.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Practice2">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0" x:Name="uiListMain" HorizontalContentAlignment="Stretch"
+                 SelectionChanged="uiListMain_SelectionChanged" SelectionMode="Multiple">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="2"
+                                   Text="{Binding Path=strStudentName}"/>
+                        <TextBlock Grid.Column="1" Margin="2"
+                                   Text="{Binding Path=strStudentAge}"/>
+                        <ProgressBar Grid.Column="2" Margin="5"
+                                     Minimum="0" Maximum="100"
+                                     Value="{Binding Path=Point}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="&lt;학생 관리&gt;" Background="#FFFF8A8A" FontWeight="Bold"/>
+            
+            <Button x:Name="uibtn_Selected" Content="선택된 학생 보기" Margin="5" Cursor="Hand" Click="uibtn_Selected_Click"/>
+            <Button x:Name="uibtn_PreStudent" Content="이전 학생 보기" Margin="5" Cursor="Hand" Click="uibtn_PreStudent_Click"/>
+            <Button x:Name="uibtn_NextStudent" Content="다음 학생 보기" Margin="5" Cursor="Hand" Click="uibtn_NextStudent_Click"/>
+            <Button x:Name="uibtn_All" Content="전체 학생 보기" Margin="5" Cursor="Hand" Click="uibtn_All_Click"/>
+        </StackPanel>
+
+        <TextBox x:Name="uiTb_Display" Grid.Column="2"/>
+        
+    </Grid>
+</Page>

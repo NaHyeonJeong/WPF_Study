@@ -1,0 +1,33 @@
+﻿<Page x:Class="BikeShop.Views.DBPractice"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BikeShop.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DBPractice">
+
+    <Grid>
+        <Button Content="DB Connection" HorizontalAlignment="Left" Margin="38,41,0,0" 
+                VerticalAlignment="Top" Height="94" Width="162" Click="DB_Connect"/>
+        <Button Content="Select Data" HorizontalAlignment="Left" Margin="484,36,0,0" 
+                VerticalAlignment="Top" Height="94" Width="162" Click="Select_Data"/>
+
+        <ListView Name="listView" Margin="465,174,135,10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="ID: "/>
+                        <TextBlock Text="{Binding UserId}" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock Text="Name: "/>
+                        <TextBlock Text="{Binding UserName}" TextDecorations="Underline" FontWeight="Bold"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<Button Content="Show in new Page" HorizontalAlignment="Left" 
+                Margin="199,255,0,0" VerticalAlignment="Top" Height="94" Width="162" 
+                Click="Show_Data_NewPage"/>-->
+    </Grid>
+</Page>
