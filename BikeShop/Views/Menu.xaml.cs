@@ -72,5 +72,12 @@ namespace BikeShop
             NavigationService.Navigate(
                 new Uri("/Views/DBPractice.xaml", UriKind.Relative));
         }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            //messenger 연습 페이지로 이동
+            NavigationService.Navigate(
+                new Uri("/Views/Messenger.xaml", UriKind.Relative));
+        }
     }
 }

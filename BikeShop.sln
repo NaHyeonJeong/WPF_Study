@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeShop", "BikeShop\BikeShop.csproj", "{C4A4E187-7E4B-4C90-8445-810B67A752A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeShop", "BikeShop\BikeShop.csproj", "{C4A4E187-7E4B-4C90-8445-810B67A752A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfStudy", "WpfStudy\WpfStudy.csproj", "{1E34CDD2-D1BA-4E49-BAD4-C6DA5B8F66F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C4A4E187-7E4B-4C90-8445-810B67A752A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A4E187-7E4B-4C90-8445-810B67A752A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A4E187-7E4B-4C90-8445-810B67A752A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E34CDD2-D1BA-4E49-BAD4-C6DA5B8F66F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E34CDD2-D1BA-4E49-BAD4-C6DA5B8F66F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E34CDD2-D1BA-4E49-BAD4-C6DA5B8F66F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E34CDD2-D1BA-4E49-BAD4-C6DA5B8F66F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

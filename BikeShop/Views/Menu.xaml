@@ -36,5 +36,7 @@
         <Button Content="TabControl" Margin="512,202,131,0" VerticalAlignment="Top" Height="65" Click="Button_Click_4"/>
         <Button Content="Practice2" Margin="305,298,338,0" VerticalAlignment="Top" Height="65" Click="Button_Click_5"/>
         <Button Content="DB" Margin="512,298,131,0" VerticalAlignment="Top" Height="65" Click="Button_Click_6"/>
+        <Button Content="MessengerTest" Margin="78,298,565,0" VerticalAlignment="Top" Height="65" Click="Button_Click_7"/>
+
     </Grid>
 </Page>
