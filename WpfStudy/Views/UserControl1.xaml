@@ -20,15 +20,7 @@
 
         <Label Content="안녕,,, 프로젝트를 위한 공부 진행 중..." Grid.Row="0" 
                FontWeight="Bold" FontSize="20" VerticalAlignment="Center"/>
-        <!--<Button Content="데이터 가져오기" Command="{Binding WaitingListUpdateBtn}" Grid.Row="0" Grid.Column="1">
-            --><!--<Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource converter}">
-                    <Binding ElementName="contentTextBlock"/>
-                    <Binding ElementName="searchButton" />
-                </MultiBinding>
-            </Button.CommandParameter>--><!--
-        </Button>-->
-        
+
         <!--사용할 ViewModel(model1의 값을 가져와 리스트 형태로 가지고 있는 부분)을 등록함 (Binding Path=Model1s)-->
         <DataGrid x:Name="waitingGrid" Grid.Row="1" Grid.ColumnSpan="2" Background="#FFD2CFCF"
                   AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" 

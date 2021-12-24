@@ -92,6 +92,7 @@ namespace WpfStudy
                 "FROM WAITING w, PATIENT p " +
                 "WHERE w.PATIENT_ID = p.PATIENT_ID " +
                 "AND TO_CHAR(w.REQUEST_TO_WAIT, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') ORDER BY w.REQUEST_TO_WAIT";
+
             using (OracleConnection conn = new OracleConnection(strCon))
             {
                 try
@@ -103,7 +104,7 @@ namespace WpfStudy
                     {
                         comm.Connection = conn;
                         comm.CommandText = sql;
-
+                        /////////////
                         using (OracleDataReader reader = comm.ExecuteReader())
                         {
                             _logger.LogInformation("select 실행");
@@ -130,6 +131,38 @@ namespace WpfStudy
                                 reader.Close();
                             }
                         }
+                        /////////////
+                        sql = 
+                            "SELECT p.PATIENT_NAME, r.RESERVATION_DATE, r.SYMPTOM, ms.STAFF_NAME " +
+                            "FROM RESERVATION r " +
+                            "JOIN PATIENT p ON r.PATIENT_ID = p.PATIENT_ID " +
+                            "JOIN MEDI_STAFF ms ON r.MEDICAL_STAFF_ID = ms.STAFF_ID ";
+
+                        comm.CommandText = sql;
+                        using (OracleDataReader reader = comm.ExecuteReader())
+                        {
+                            _logger.LogInformation("select 실행");
+                            _logger.LogInformation("[SQL QUERY] " + sql);
+
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    Model2s.Add(new Model2()
+                                    {
+                                        PatientName = reader.GetString(reader.GetOrdinal("PATIENT_NAME")),
+                                        ReservationDate = reader.GetDateTime(reader.GetOrdinal("RESERVATION_DATE")),
+                                        Symptom = reader.GetString(reader.GetOrdinal("SYMPTOM")),
+                                        Doctor = reader.GetString(reader.GetOrdinal("STAFF_NAME"))
+                                    });
+                                }
+                            }
+                            finally
+                            {
+                                _logger.LogInformation("데이터 읽어오기 성공");
+                                reader.Close();
+                            }
+                        }
                     }
                 }
                 catch (Exception err)
@@ -144,7 +177,7 @@ namespace WpfStudy
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ObservableCollection과 함수, 버튼을 따로 두고 각 버튼을 누를 때 마다 값을 따로 가져옴
+        /// ObservableCollection과 함수, 버튼을 따로 두고 각 버튼을 누를 때 마다 값을 따로 가져옴 - 성공
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         private ObservableCollection<Model2> model2;
         public ObservableCollection<Model2> Model2s

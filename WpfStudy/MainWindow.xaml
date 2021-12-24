@@ -25,8 +25,8 @@
         </Grid.RowDefinitions>
         
         <Label Content="공부 진행중입니다" Grid.Row="0" Grid.ColumnSpan="2" Background="Yellow"/>
-        <Button Content="데이터 가져오기1" Command="{Binding WaitingListUpdateBtn}" Grid.Row="0" Grid.Column="1"></Button>
-        <Button Content="데이터 가져오기2" Command="{Binding ReservationListUpdateBtn}" Grid.Row="0" Grid.Column="2"></Button>
+        <Button Content="데이터 가져오기" Command="{Binding WaitingListUpdateBtn}" Grid.Row="0" Grid.Column="2"></Button>
+        <!--<Button Content="데이터 가져오기2" Command="{Binding ReservationListUpdateBtn}" Grid.Row="0" Grid.Column="2"></Button>-->
         
         <Border Grid.Row="1" Grid.ColumnSpan="3">
             <local:UserControl1/>
