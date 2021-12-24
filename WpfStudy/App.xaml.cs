@@ -2,11 +2,6 @@
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace WpfStudy
@@ -20,7 +15,7 @@ namespace WpfStudy
         {
             Ioc.Default.ConfigureServices
                 (new ServiceCollection()
-                    .AddSingleton<ViewModel>() //viewmodel 등록
+                    .AddSingleton<ViewModel1>() //viewmodel 등록
                     .AddLogging(builder => //log 관련 등록
                     {
                         var logger = new LoggerConfiguration()
@@ -40,7 +35,7 @@ namespace WpfStudy
         {
             var services = new ServiceCollection();
             // ViewModel, View 등록
-            services.AddSingleton<ViewModel>();
+            services.AddSingleton<ViewModel1>();
 
             return services.BuildServiceProvider();
         }

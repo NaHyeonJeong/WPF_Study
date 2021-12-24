@@ -1,20 +1,16 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfStudy
 {
     public partial class Model1 : ObservableObject
     {
         //환자 이름
-        private string wPatientName;
-        public string WPatientName
+        private string patientName;
+        public string PatientName
         {
-            get => wPatientName;
-            set => SetProperty(ref wPatientName, value);
+            get => patientName;
+            set => SetProperty(ref patientName, value);
         }
 
         //환자 성별
@@ -50,11 +46,11 @@ namespace WpfStudy
         }
 
         //환자의 증상
-        private string wSymptom;
-        public string WSymptom
+        private string symptom;
+        public string Symptom
         {
-            get => wSymptom;
-            set => SetProperty(ref wSymptom, value);
+            get => symptom;
+            set => SetProperty(ref symptom, value);
         }
     }
 }
