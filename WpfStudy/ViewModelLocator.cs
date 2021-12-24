@@ -1,5 +1,4 @@
 ﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
-using WpfStudy.ViewModels;
 
 namespace WpfStudy
 {
@@ -9,6 +8,6 @@ namespace WpfStudy
         //우선, 이 파일을 App.xaml에 등록한다
         //추가적으로 여기에 작성한 것들은 App.xaml.cs 파일에 등록해야 사용이 가능하다
         public static ViewModel1 VM1 => Ioc.Default.GetService<ViewModel1>();
-        public static ViewModel2 VM2 => Ioc.Default.GetService<ViewModel2>();
+        //public static ViewModel2 VM2 => Ioc.Default.GetService<ViewModel2>();
     }
 }

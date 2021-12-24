@@ -1,6 +1,9 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 
+/**
+ * 예약 환자 리스트 관련 Model
+ */
 namespace WpfStudy.Models
 {
     public class Model2 : ObservableObject

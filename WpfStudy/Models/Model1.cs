@@ -1,6 +1,9 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 
+/**
+ * 병원에서 대기중인 환자 리스트
+ */
 namespace WpfStudy
 {
     public partial class Model1 : ObservableObject

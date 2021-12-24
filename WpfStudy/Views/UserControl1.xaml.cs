@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace WpfStudy.Views
 {
@@ -23,6 +10,17 @@ namespace WpfStudy.Views
         public UserControl1()
         {
             InitializeComponent();
+        }
+
+        private void Row_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var row = sender as DataGridRow;
+            if (row != null && row.IsSelected)
+            {
+                DetailWindow1 ad = new DetailWindow1();
+                ad.Title = "(임시) 병원 대기자 정보 페이지";
+                ad.ShowDialog();
+            }
         }
     }
 }

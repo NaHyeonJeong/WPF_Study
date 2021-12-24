@@ -24,7 +24,8 @@
         <!--사용할 ViewModel(model1의 값을 가져와 리스트 형태로 가지고 있는 부분)을 등록함 (Binding Path=Model1s)-->
         <DataGrid x:Name="waitingGrid" Grid.Row="1" Grid.ColumnSpan="2" Background="#FFD2CFCF"
                   AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" 
-                  ItemsSource="{Binding Path=Model1s, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
+                  ItemsSource="{Binding Path=Model1s, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                  SelectedItem="{Binding SelectedItem}" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="이름" Binding="{Binding PatientName}"/>
                 <DataGridTextColumn Header="성별" Binding="{Binding PatientGender}"/>
@@ -33,6 +34,19 @@
                 <DataGridTextColumn Header="대기 등록 시간" Binding="{Binding RequestToWait}"/>
                 <DataGridTextColumn Width="*" Header="증상 설명" Binding="{Binding Symptom}"/>
             </DataGrid.Columns>
+            <!--한 행을 더블클릭 하면 새 창을 띄우기 위한 코드-->
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <!--마우스 이벤트 처리-->
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+            <DataGrid.InputBindings>
+                <!--이벤트 발생 시 데이터 바인딩-->
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding DoubleClickCommand}"
+                              CommandParameter="{Binding CollectionView}"/>
+            </DataGrid.InputBindings>
         </DataGrid>
     </Grid>
 </UserControl>
