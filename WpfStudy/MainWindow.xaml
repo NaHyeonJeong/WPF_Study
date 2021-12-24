@@ -16,22 +16,22 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="공부 진행중입니다" Grid.Row="0" Grid.Column="0" Background="Yellow"/>
-        <Button Content="데이터 가져오기" Command="{Binding WaitingListUpdateBtn}" Grid.Row="0" Grid.Column="1">
-            <!--<Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource }"
-            </Button.CommandParameter>-->
-        </Button>
-        <Border Grid.Row="1" Grid.ColumnSpan="2">
+        
+        <Label Content="공부 진행중입니다" Grid.Row="0" Grid.ColumnSpan="2" Background="Yellow"/>
+        <Button Content="데이터 가져오기1" Command="{Binding WaitingListUpdateBtn}" Grid.Row="0" Grid.Column="1"></Button>
+        <Button Content="데이터 가져오기2" Command="{Binding ReservationListUpdateBtn}" Grid.Row="0" Grid.Column="2"></Button>
+        
+        <Border Grid.Row="1" Grid.ColumnSpan="3">
             <local:UserControl1/>
         </Border>
-        <Border Grid.Row="2" Grid.ColumnSpan="2">
+        <Border Grid.Row="2" Grid.ColumnSpan="3">
             <local:UserControl2/>
         </Border>
     </Grid>

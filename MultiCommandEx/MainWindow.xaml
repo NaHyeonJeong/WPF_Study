@@ -9,7 +9,6 @@
     <Window.Resources>
         <local:StringObjectConverter x:Key="StringObjectConverter" />
     </Window.Resources>
-
     <Grid>
         <StackPanel>
             <TextBox Name="contentTextBlock" Width="100" Height="30" Margin="10"/>

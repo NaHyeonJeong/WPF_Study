@@ -1,52 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace MultiCommandEx
 {
-    public class StringObject
+    public class StringObject: ObservableObject
     {
         /// <summary>
-
         /// 문자열 데이터입니다.
-
         /// </summary>
-
-        public string StringData;
-
-
-
-        /// <summary>
-
-        /// 오브젝트 데이터입니다.
-
-        /// </summary>
-
-        public object ObjectData;
-
-
-
-        /// <summary>
-
-        /// 생성자입니다.
-
-        /// </summary>
-
-        /// <param name="stringData">문자열 데이터입니다.</param>
-
-        /// <param name="objectData">오브젝트 데이터입니다.</param>
-
-        public StringObject(string stringData, object objectData)
-
+        private string stringData;
+        public string StringData
         {
-
-            this.StringData = stringData;
-
-            this.ObjectData = objectData;
-
+            get => stringData;
+            set => SetProperty(ref stringData, value);
         }
 
+        /// <summary>
+        /// 오브젝트 데이터입니다.
+        /// </summary>
+        private object objectData;
+        public object ObjectData
+        {
+            get => objectData;
+            set => SetProperty(ref objectData, value);
+        }
+
+        /// <summary>
+        /// 생성자입니다.
+        /// </summary>
+        /// <param name="stringData">문자열 데이터입니다.</param>
+        /// <param name="objectData">오브젝트 데이터입니다.</param>
+        public StringObject(string stringData, object objectData)
+        {
+            this.stringData = stringData;
+            this.objectData = objectData;
+        }
     }
 }

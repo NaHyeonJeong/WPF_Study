@@ -34,8 +34,12 @@ namespace WpfStudy
         {
             _logger = logger;
             _logger.LogInformation("{@ILogger}", logger);
+
             Model1s = new ObservableCollection<Model1>();
             Model1s.CollectionChanged += ContentCollectionChanged;
+            
+            Model2s = new ObservableCollection<Model2>();
+            Model2s.CollectionChanged += ContentCollectionChanged;
         }
 
         //== Messenger 기초 start ==//
@@ -67,6 +71,14 @@ namespace WpfStudy
             {
                 _logger.LogInformation("{@model1}", model1);
                 WeakReferenceMessenger.Default.Send(Model1s); //Send() 필수
+                _logger.LogInformation("send 성공");
+            }
+
+            var model2 = sender as Model2; 
+            if (model2 != null)
+            {
+                _logger.LogInformation("{@model1}", model1);
+                WeakReferenceMessenger.Default.Send(Model2s);
                 _logger.LogInformation("send 성공");
             }
         }
@@ -101,7 +113,7 @@ namespace WpfStudy
                             {
                                 while (reader.Read())
                                 {
-                                    Model1s.Add(new Model1() //.Add()를 해야지 데이터의 변화를 감지할 수 있음
+                                    Model1s.Add(new Model1()
                                     {
                                         PatientName = reader.GetString(reader.GetOrdinal("PATIENT_NAME")),
                                         PatientGender = reader.GetString(reader.GetOrdinal("GENDER")),
@@ -132,6 +144,8 @@ namespace WpfStudy
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ObservableCollection과 함수, 버튼을 따로 두고 각 버튼을 누를 때 마다 값을 따로 가져옴
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         private ObservableCollection<Model2> model2;
         public ObservableCollection<Model2> Model2s
         {
@@ -139,6 +153,60 @@ namespace WpfStudy
             set { SetProperty(ref model2, value); }
         }
 
+        private void GetReservationPatientList()
+        {
+            string sql =
+                "SELECT p.PATIENT_NAME, r.RESERVATION_DATE, r.SYMPTOM, ms.STAFF_NAME " +
+                "FROM RESERVATION r " +
+                "JOIN PATIENT p ON r.PATIENT_ID = p.PATIENT_ID " +
+                "JOIN MEDI_STAFF ms ON r.MEDICAL_STAFF_ID = ms.STAFF_ID ";
 
+            using (OracleConnection conn = new OracleConnection(strCon))
+            {
+                try
+                {
+                    conn.Open();
+                    _logger.LogInformation("DB Connection OK...");
+
+                    using (OracleCommand comm = new OracleCommand())
+                    {
+                        comm.Connection = conn;
+                        comm.CommandText = sql;
+
+                        using (OracleDataReader reader = comm.ExecuteReader())
+                        {
+                            _logger.LogInformation("select 실행");
+                            _logger.LogInformation("[SQL QUERY] " + sql);
+
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    Model2s.Add(new Model2()
+                                    {
+                                        PatientName = reader.GetString(reader.GetOrdinal("PATIENT_NAME")),
+                                        ReservationDate = reader.GetDateTime(reader.GetOrdinal("RESERVATION_DATE")),
+                                        Symptom = reader.GetString(reader.GetOrdinal("SYMPTOM")),
+                                        Doctor = reader.GetString(reader.GetOrdinal("STAFF_NAME"))
+                                    });
+                                }
+                            }
+                            finally
+                            {
+                                _logger.LogInformation("데이터 읽어오기 성공");
+                                reader.Close();
+                            }
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
+                    _logger.LogInformation(err.ToString());
+                }
+            }
+        }
+
+        private RelayCommand reservationListUpdateBtn;
+        public ICommand ReservationListUpdateBtn => reservationListUpdateBtn ??= new RelayCommand(GetReservationPatientList);
     }
 }

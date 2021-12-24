@@ -23,7 +23,6 @@ namespace MultiCommandEx
                     {
                         string stringData = stringObject.StringData;
                         object objectData = stringObject.ObjectData;
-
                     });
                 }
                 return stringObjectCommand;
