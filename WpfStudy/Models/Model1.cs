@@ -8,6 +8,14 @@ namespace WpfStudy
 {
     public partial class Model1 : ObservableObject
     {
+        //환자 번호
+        private int patientId;
+        public int PatientId
+        {
+            get => patientId;
+            set => SetProperty(ref patientId, value);
+        }
+
         //환자 이름
         private string patientName;
         public string PatientName

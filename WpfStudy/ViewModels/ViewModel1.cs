@@ -96,11 +96,12 @@ namespace WpfStudy
         }
         //== Messenger 기초 end ==//
 
-        //SQL Query
+        //== SQL Query ==//
+        //대기중인 환자 list, 예약한 환자 list 가져옴
         private void GetWaitingPatientList()
         {
             string sql =
-                "SELECT p.PATIENT_NAME, p.GENDER, p.PHONE_NUM, p.ADDRESS, w.REQUEST_TO_WAIT, w.REQUIREMENTS " +
+                "SELECT w.PATIENT_ID, p.PATIENT_NAME, p.GENDER, p.PHONE_NUM, p.ADDRESS, w.REQUEST_TO_WAIT, w.REQUIREMENTS " +
                 "FROM WAITING w, PATIENT p " +
                 "WHERE w.PATIENT_ID = p.PATIENT_ID " +
                 "AND TO_CHAR(w.REQUEST_TO_WAIT, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') ORDER BY w.REQUEST_TO_WAIT";
@@ -129,6 +130,7 @@ namespace WpfStudy
                                 {
                                     Model1s.Add(new Model1()
                                     {
+                                        PatientId = reader.GetInt32(reader.GetOrdinal("PATIENT_ID")),
                                         PatientName = reader.GetString(reader.GetOrdinal("PATIENT_NAME")),
                                         PatientGender = reader.GetString(reader.GetOrdinal("GENDER")),
                                         PatientPhoneNum = reader.GetString(reader.GetOrdinal("PHONE_NUM")),
@@ -140,7 +142,7 @@ namespace WpfStudy
                             }
                             finally
                             {
-                                _logger.LogInformation("병원에서 대기 중인 환자 데이터 읽어오기 성공");
+                                _logger.LogInformation("병원에서 대기 중인 환자 데이터 <읽어오기> 성공");
                                 reader.Close();
                             }
                         }
@@ -173,7 +175,7 @@ namespace WpfStudy
                             }
                             finally
                             {
-                                _logger.LogInformation("예약 환자 데이터 읽어오기 성공");
+                                _logger.LogInformation("예약 환자 데이터 <읽어오기> 성공");
                                 reader.Close();
                             }
                         }
@@ -185,7 +187,6 @@ namespace WpfStudy
                 }
             }
         }
-
         private RelayCommand waitingListUpdateBtn;
         public ICommand WaitingListUpdateBtn => waitingListUpdateBtn ??= new RelayCommand(GetWaitingPatientList);
 
@@ -201,7 +202,6 @@ namespace WpfStudy
             get => selectedItem;
             set => SetProperty(ref selectedItem, value);
         }
-        //== row 더블 클릭 시 화면에 있던 데이터를 새로운 윈도우로 넘기기 위한 기초 과정 end ==//
 
         private void DoubleClick()
         {
@@ -209,6 +209,49 @@ namespace WpfStudy
             _logger.LogInformation("선택된 행의 환자 이름은 " + selected.PatientName +
                 ", 증상은 \"" + selected.Symptom + "\" 입니다.");
         }
+        //== row 더블 클릭 시 화면에 있던 데이터를 새로운 윈도우로 넘기기 위한 기초 과정 end ==//
+
+        //== SQL Query ==//
+        //병원에서 대기 중인 환자 데이터 수정
+        private void UpdateWaitingData()
+        {
+            //update는 where절이 필요하다
+            //즉, 환자 번호가 있어야 update문을 안전하게 할 수 있음
+            string sql =
+                "UPDATE WAITING " +
+                "SET REQUIREMENTS = '" + SelectedItem.Symptom + "\'" +
+                "WHERE PATIENT_ID = " + SelectedItem.PatientId;
+
+            using (OracleConnection conn = new OracleConnection(strCon))
+            {
+                try
+                {
+                    conn.Open();
+                    _logger.LogInformation("DB Connection OK...");
+
+                    using (OracleCommand comm = new OracleCommand())
+                    {
+                        comm.Connection = conn;
+                        comm.CommandText = sql;
+                        //comm.Parameters.Add(new OracleParameter("patientId", new Model1({ PatientId = }));
+                        _logger.LogInformation("update 실행");
+                        _logger.LogInformation("[SQL QUERY] " + sql);
+                        comm.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception err)
+                {
+                    _logger.LogInformation(err.ToString());
+                }
+                finally
+                {
+                    _logger.LogInformation("예약 환자 데이터 <수정> 성공");
+                    conn.Close();
+                }
+            }
+        }
+        private RelayCommand updateWaitingDataBtn;
+        public ICommand UpdateWaitingDataBtn => updateWaitingDataBtn ??= new RelayCommand(UpdateWaitingData);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ObservableCollection과 함수, 버튼을 따로 두고 각 버튼을 누를 때 마다 값을 따로 가져옴 - 성공

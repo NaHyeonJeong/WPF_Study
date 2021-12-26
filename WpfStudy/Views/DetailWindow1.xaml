@@ -7,20 +7,37 @@
         DataContext="{Binding VM1, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="DetailWindow1" Height="450" Width="800">
+    <!--병원에서 대기 중인 환자의 상세정보-->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <Label Content="환자의 이름은 " Grid.Column="0"
                VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Text="{Binding Path=SelectedItem.PatientName, Mode=TwoWay}" Grid.Column="1"
+        <TextBlock Text="{Binding Path=SelectedItem.PatientName, Mode=TwoWay}" Grid.Column="1"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto"/>
         <Label Content="병원에 올 때 증상은 " Grid.Column="2"
                VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox Text="{Binding Path=SelectedItem.Symptom, Mode=TwoWay}" Grid.Column="3"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto"/>
+        <Label Content="대기자 등록된 시간은 " Grid.Column="4"
+               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="{Binding Path=SelectedItem.RequestToWait, Mode=TwoWay}" Grid.Column="5"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto"/>
+
+        <Button Content="수정" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                Command="{Binding UpdateWaitingDataBtn}"/>
+        <Button Content="삭제" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                Command="{Binding DeleteWaitingDataBtn}"/>
     </Grid>
 </Window>

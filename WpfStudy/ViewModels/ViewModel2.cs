@@ -8,6 +8,7 @@ namespace WpfStudy.ViewModels
 {
     /**
      * Receive의 역할을 하는 ViewModel
+     * 이거 도대체 언제 사용하는겨...
      */
     public class ViewModel2 : ObservableRecipient, IRecipient<ObservableCollection<Model1>>, IRecipient<Model1>
     {
